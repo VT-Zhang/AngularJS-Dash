@@ -1,5 +1,18 @@
 app.factory("storesFactory", ["$http", function($http){
     var factory = {};
+    
+    factory.getAllClients = function(callback){
+        $http.get('http://127.0.0.1:8000/api/client/')
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
 
 //********* functions for loading options ***********
     factory.loadStates = function(callback){
@@ -31,33 +44,6 @@ app.factory("storesFactory", ["$http", function($http){
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data);
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    }
-
-//*********for loginController functions***********
-
-    factory.login = function(user, callback){
-        $http.post("http://127.0.0.1:8000/admin/login/?next=/admin/", user)
-        .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    }
-
-//*********for dashboardController functions***********
-     factory.dashboardIndex = function(callback){
-        $http.get("/dashboard")
-        .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
             }
         })
         .catch(function(err){
@@ -97,6 +83,33 @@ app.factory("storesFactory", ["$http", function($http){
         $http.post("", client)
         .then(function(returned_data){
             console.log(returned_data.data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+//*********for loginController functions***********
+
+    factory.login = function(user, callback){
+        $http.post("http://127.0.0.1:8000/admin/login/?next=/admin/", user)
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+//*********for dashboardController functions***********
+     factory.dashboardIndex = function(callback){
+        $http.get("/dashboard")
+        .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }

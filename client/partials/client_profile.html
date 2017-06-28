@@ -1,0 +1,17 @@
+<h3>Client Profiles</h3>
+<table>
+        <tr>
+            <th>Client Name</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Phone</th>
+        </tr>
+        <tr ng-repeat="client in client | filter:filter_client">
+            <td>{{client.name}}</td>
+            <td>{{client.id_name}}</td>
+            <td>{{client.client_type_name}}</td>
+            <td>{{client.phone}}</td>
+        </tr>
+</table>
+
+<p><input type="text" placeholder="search client" ng-model="filter_client" /></p>

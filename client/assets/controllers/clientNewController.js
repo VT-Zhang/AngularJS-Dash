@@ -1,4 +1,4 @@
-app.controller("clientNewController", ["$scope", "$http", "storesFactory", function($scope, $http, storesFactory){
+app.controller("clientNewController", ["$scope", "storesFactory", function($scope, storesFactory){
 
     $scope.newClient = {};
 

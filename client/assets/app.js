@@ -5,6 +5,14 @@ app.config(function($routeProvider){
         templateUrl:"partials/login.html",
         controller: "loginController"
     })
+    .when("/client_new", {
+        templateUrl:"partials/client_new.html",
+        controller: "clientNewController"
+    })
+    .when("/client_profile", {
+        templateUrl:"partials/client_profile.html",
+        controller: "clientProfileController"
+    })
     .when("/dashboard", {
         templateUrl:"partials/dashboard.html"
     })
@@ -16,10 +24,6 @@ app.config(function($routeProvider){
     })
     .when("/customers", {
         templateUrl:"partials/customers.html"
-    })
-    .when("/client_new", {
-        templateUrl:"partials/client_new.html",
-        controller: "clientNewController"
     })
     .otherwise({
         templateUrl:"partials/dashboard.html"
