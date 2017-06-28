@@ -2,7 +2,8 @@ var app = angular.module("app", ["ngRoute", "ngCookies"]);
 app.config(function($routeProvider){
     $routeProvider
     .when("/", {
-        templateUrl:"partials/login.html"
+        templateUrl:"partials/login.html",
+        controller: "loginController"
     })
     .when("/dashboard", {
         templateUrl:"partials/dashboard.html"
@@ -17,7 +18,8 @@ app.config(function($routeProvider){
         templateUrl:"partials/customers.html"
     })
     .when("/client_new", {
-        templateUrl:"partials/client_new.html"
+        templateUrl:"partials/client_new.html",
+        controller: "clientNewController"
     })
     .otherwise({
         templateUrl:"partials/dashboard.html"

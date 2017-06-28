@@ -1,10 +1,22 @@
 app.factory("storesFactory", ["$http", function($http){
     var factory = {};
 
+    factory.loadStates = function(callback){
+        $http.get("/JSON/states.json")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
 //*********for loginController functions***********
 
     factory.login = function(user, callback){
-        $http.post("/users", user)
+        $http.post("http://127.0.0.1:8000/admin/login/?next=/admin/", user)
         .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);

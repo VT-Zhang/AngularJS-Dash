@@ -1,11 +1,11 @@
-
-<h1>New Client Page</h1>
-<div ng-controller="clientNewController">
-
+<h1>Create New Client</h1>
+    <h4>Import Client Data from Zoho CRM System</h4>
     <select ng-options="client.name for client in clients" ng-model="selected" ng-change="getZohoAccount()">
     </select>
-
-    <form ng-submit="create()">
+    <br>
+    <hr>
+    <br>
+    <form ng-submit="">
         <p>Client Type: <select ng-options="ct.type for ct in client_type" ng-model="newClient.client_type"></select></p>
         <p>Client Name: <input type="text" ng-model="newClient.name"></p>
         <p>Phone: <input type="text" ng-model="newClient.phone"></p>
@@ -27,4 +27,3 @@
         <input type="submit" value="Create New Client"> | <button ng-click="clearForm()">Reset Form</button>
     </form>
 
-</div>
