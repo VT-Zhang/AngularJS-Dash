@@ -1,11 +1,36 @@
 app.factory("storesFactory", ["$http", function($http){
     var factory = {};
 
+//********* functions for loading options ***********
     factory.loadStates = function(callback){
-        $http.get("/JSON/states.json")
+        $http.get("assets/json/states.json")
         .then(function(returned_data){
             if(typeof(callback)=="function"){
-                callback(returned_data.data);
+                callback(returned_data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+    factory.loadCountries = function(callback){
+        $http.get("assets/json/countries.json")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
+    factory.loadClientTypes = function(callback){
+        $http.get("assets/json/client_types.json")
+        .then(function(returned_data){
+            if(typeof(callback)=="function"){
+                callback(returned_data);
             }
         })
         .catch(function(err){
