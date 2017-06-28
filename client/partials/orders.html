@@ -1,0 +1,49 @@
+<h1>Orders Page</h1>
+<div ng-controller="ordersController">
+    <h3><u>Add a new order</u></h3>
+    <form ng-submit="create()">
+        <p>Customer <select ng-model="newOrder._customer">
+                        <option disabled selected value="">Select Customer</option>
+                        <option ng-repeat="customer in customers track by $index" value="{{customer._id}}">{{customer.cname}}</option>
+                    </select>
+        </p>
+        <p>Product <select ng-model="newOrder._product" >
+                        <option disabled selected value="">Select Product</option>
+                        <option ng-repeat="product in products track by $index" value="{{product._id}}">{{product.pname}}</option>
+                    </select>
+        </p>
+        <p>Quantity <select ng-model="newOrder.quantity">
+                        <option disabled selected value="">Select Quantity</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+        </p>
+        <input type="submit" value="Place Order" />
+    </form>
+    <p style="color:red">{{errors}}</p>
+    <hr />
+    <h3><u>Current Orders</u></h3>
+    <p><input type="text" placeholder="search order" ng-model="filter_order" /></p>
+    <table>
+        <tr>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Date</th>
+        </tr>
+        <tr ng-repeat="order in orders | filter:filter_order | orderBy: '-createdAt' track by $index">
+            <td>{{order._customer.cname}}</td>
+            <td>{{order._product.pname}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.createdAt | date:"short"}}</td>
+        </tr>
+    </table>
+</div>

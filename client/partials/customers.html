@@ -1,0 +1,27 @@
+<h1>Customers Page</h1>
+<div ng-controller="customersController">
+    <h3><u>Add a new customer</u></h3>
+    <form ng-submit="create()">
+        <p>Customer Name: <input type="text" ng-model="newCustomer.cname" /></p>
+        <input type="submit" value="Add" />
+    </form>
+    <p style="color:red">{{errors}}</p>
+    <div ng-repeat="error in errors track by $index">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+    <hr />
+    <p><input type="text" placeholder="search name" ng-model="filter_name" /></p>
+    <table>
+        <tr>
+            <th>Customer Name</th>
+            <th>Created Date</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="customer in customers | filter:filter_name | orderBy: '-createdAt' track by $index">
+            <td>{{customer.cname}}</td>
+            <td>{{customer.createdAt | date:"short"}}</td>
+            <td><button type="button" ng-click="delete(customer._id)">Remove</button></td>
+        </tr>
+    </table>
+
+</div>

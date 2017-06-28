@@ -1,0 +1,30 @@
+
+<h1>New Client Page</h1>
+<div ng-controller="clientNewController">
+
+    <select ng-options="client.name for client in clients" ng-model="selected" ng-change="getZohoAccount()">
+    </select>
+
+    <form ng-submit="create()">
+        <p>Client Type: <select ng-options="ct.type for ct in client_type" ng-model="newClient.client_type"></select></p>
+        <p>Client Name: <input type="text" ng-model="newClient.name"></p>
+        <p>Phone: <input type="text" ng-model="newClient.phone"></p>
+        <p>Fax: <input type="text" ng-model="newClient.fax"></p>
+        <p>Email: <input type="text" ng-model="newClient.email"></p>
+        <p>Address: <input type="text" ng-model="newClient.address"></p>
+        <p>City: <input type="text" ng-model="newClient.city"></p>        
+        <p>State: <select ng-model="newClient.state">
+                      <option selected>{{newClient.state}}</option>
+                      <option ng-repeat="state in states" value="state.name">{{state.name}}</option>
+                  </select>
+        </p>
+        <p>Zipcode: <input type="text" ng-model="newClient.zip"></p>                
+        <p>Country: <select ng-model="newClient.country">
+                        <option>{{newClient.country}}</option>
+                        <option ng-repeat="country in countries" value="country.name">{{country.name}}</option>
+                    </select>
+        </p>
+        <input type="submit" value="Create New Client"> | <button ng-click="clearForm()">Reset Form</button>
+    </form>
+
+</div>

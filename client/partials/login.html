@@ -1,0 +1,11 @@
+<div ng-controller="loginController">
+    <h3>Enter your name and log in!</h3>
+    <form ng-submit="login()">
+        <input type="text" placeholder="enter your name.." ng-model="user.username" />
+        <input type="password" placeholder="password" ng-model="user.password">
+        <input type="submit" value="Login" />
+    </form>
+    <div ng-repeat="error in errors">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+</div>

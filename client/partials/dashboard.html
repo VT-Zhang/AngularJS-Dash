@@ -1,0 +1,33 @@
+
+<h1>Dashboard Page</h1>
+<div ng-controller="dashboardController">
+    <h3><u>Our Current Inventory:</u></h3>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Inventory</th>
+        </tr>
+        <tr ng-repeat="product in products | orderBy: '-createdAt'">
+            <th>{{product.pname}}</th>
+            <th>{{product.description}}</th>
+            <th>{{product.inventory}}</th>
+        </tr>
+    </table>
+
+    <hr />
+
+    <h3><u>Recent Orders:</u></h3>
+    <div ng-repeat="order in orders | orderBy: '-createdAt' | limitTo: 3">
+        <p><u>{{order._customer.cname}}</u> purchased {{order.quantity}} {{order._product.pname}} ... (<i>{{order.createdAt | date:"short"}}</i>)</p>
+    </div>
+
+    <hr />
+
+    <h3><u>New Customers:</u></h3>
+    <div ng-repeat="customer in customers | orderBy: '-createdAt' | limitTo: 3">
+        <p><u>{{customer.cname}}</u> joined the store...(<i>{{customer.createdAt | date:"short"}}</i>)</p>
+    </div>
+
+    <hr />
+</div>

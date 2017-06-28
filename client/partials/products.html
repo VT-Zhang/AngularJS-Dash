@@ -1,0 +1,38 @@
+<h1>Products Page</h1>
+<div ng-controller="productsController">
+    <h3><u>Add a new product</u></h3>
+    <form ng-submit="create()">
+        <p>Product Name: <input type="text" ng-model="newProduct.pname" /></p>
+        <p>Description: <textarea cols="30" row="3" placeholder="enter description.." ng-model="newProduct.description"></textarea></p>
+        <p>Inventory: <select ng-model="newProduct.inventory">
+            <option disabled selected value="">Initial Qty</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+        </select>
+        <input type="submit" value="Add" /></p>
+    </form>
+    <div ng-repeat="error in errors track by $index">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+    
+    <hr />
+
+    <h3><u>Your current inventory</u></h3>
+    <p><input type="text" placeholder="search product" ng-model="filter_product" /></p>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Current Inventory</th>
+        </tr>
+        <tr ng-repeat="product in products | filter: filter_product | orderBy: '-createdAt'">
+            <td>{{product.pname}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.inventory}}</td>
+        </tr>
+    </table>
+</div>
