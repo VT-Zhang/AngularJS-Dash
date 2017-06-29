@@ -1,0 +1,30 @@
+[
+    {
+        "url": "http://127.0.0.1:8000/api/client/1/",
+        "id_name": "CLT0001",
+        "name": "Optimal Health Dimensions",
+        "client_type_name": "Clinic",
+        "phone": "(703) 359-9300"
+    },
+    {
+        "url": "http://127.0.0.1:8000/api/client/2/",
+        "id_name": "CLT0002",
+        "name": "UCLA",
+        "client_type_name": "Clinic",
+        "phone": "3102063945"
+    },
+    {
+        "url": "http://127.0.0.1:8000/api/client/3/",
+        "id_name": "CLT0003",
+        "name": "Sterling Practice",
+        "client_type_name": "Clinic",
+        "phone": "9912321321"
+    },
+    {
+        "url": "http://127.0.0.1:8000/api/client/4/",
+        "id_name": "CLT0004",
+        "name": "fdsafdsaf",
+        "client_type_name": "Researcher",
+        "phone": "3213219"
+    }
+]

@@ -6,7 +6,7 @@
             <th>Type</th>
             <th>Phone</th>
         </tr>
-        <tr ng-repeat="client in client | filter:filter_client">
+        <tr ng-repeat="client in clients | filter:filter_client">
             <td>{{client.name}}</td>
             <td>{{client.id_name}}</td>
             <td>{{client.client_type_name}}</td>

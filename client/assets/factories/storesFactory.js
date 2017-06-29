@@ -2,7 +2,7 @@ app.factory("storesFactory", ["$http", function($http){
     var factory = {};
     
     factory.getAllClients = function(callback){
-        $http.get('http://127.0.0.1:8000/api/client/')
+        $http.get("assets/json/client_profiles.json")
         .then(function(returned_data){
             console.log(returned_data);
             if(typeof(callback)=="function"){
