@@ -1,18 +1,19 @@
-app.factory("storesFactory", ["$http", "$localStorage", "jwtHelper", function($http, $localStorage, jwtHelper){
+app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper", function($http, $localStorage, $cookies, jwtHelper){
     var factory = {};
 
-    factory.login = function(username, password, callback){
+//********* login and logout function ***********
+    factory.login = function(user, callback){
         $http.post(
             "http://127.0.0.1:8000/api/auth/token",
             {
-                "username": username,
-                "password": password
+                "username": user.username,
+                "password": user.password
             }
         )
         .then(function(returned_data){
             console.log(returned_data);
             var token = returned_data.data.token;
-            $localStorage.currentUser = { username: username, token: token };
+            $cookies.put("token", token)
             $http.defaults.headers.common.Authorization = 'Bearer ' + token;
             var tokenPayload = jwtHelper.decodeToken(token);
             var date = jwtHelper.getTokenExpirationDate(token);
@@ -21,7 +22,7 @@ app.factory("storesFactory", ["$http", "$localStorage", "jwtHelper", function($h
             console.log(tokenPayload);
             console.log("Valid until: " + date);
             console.log("Expired? " + bool); 
-            console.log($localStorage.currentUser);
+            console.log($localStorage.token);
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }
@@ -31,13 +32,17 @@ app.factory("storesFactory", ["$http", "$localStorage", "jwtHelper", function($h
             callback(err.data);
         });
     }
+
     factory.logout = function(){
         delete $localStorage.currentUser;
         $http.defaults.headers.common.Authorization = '';
     }
-    
+
+
+//*********for clientProfileController functions***********
+
     factory.getAllClients = function(callback){
-        $http.get("assets/json/client_profiles.json")
+        $http.get("http://127.0.0.1:8000/api/client")
         .then(function(returned_data){
             console.log(returned_data);
             if(typeof(callback)=="function"){

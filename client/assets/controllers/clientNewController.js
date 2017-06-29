@@ -1,7 +1,7 @@
-app.controller("clientNewController", ["$scope", "storesFactory", function($scope, storesFactory){
+app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", function($scope, storesFactory, $cookies){
 
     $scope.newClient = {};
-
+    $scope.username = $cookies.get("username");
     var index = function(){
         storesFactory.getZohoID(function(data){
             $scope.clients = data;

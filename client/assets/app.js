@@ -30,18 +30,36 @@ app.config(function($routeProvider){
     });
 });
 
-// app.run(function($rootScope, $http, $location, $localStorage) {
-//         // keep user logged in after page refresh
-//         if ($localStorage.currentUser) {
-//             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-//         }
- 
-//         // redirect to login page if not logged in and trying to access a restricted page
-//         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-//             var publicPages = ['/'];
-//             var restrictedPage = publicPages.indexOf($location.path()) === -1;
-//             if (restrictedPage && !$localStorage.currentUser) {
-//                 $location.path('/');
-//             }
-//         });
+app.config(function Config($httpProvider, jwtOptionsProvider) {
+    // Please note we're annotating the function so that the $injector works when the file is minified
+    $httpProvider.interceptors.push('jwtInterceptor');
+    jwtOptionsProvider.config({
+        whiteListedDomains: ['127.0.0.1', 'localhost'],
+        tokenGetter: function(options, $cookies, jwtHelper) {
+            var token = $cookies.get("token");
+            console.log(token);
+            return token;
+        }
+    });
+});
+
+// app.factory('authInterceptor', function ($rootScope, $q, $window) {
+//   return {
+//     request: function (config) {
+//       config.headers = config.headers || {};
+//       if ($window.sessionStorage.token) {
+//         config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+//       }
+//       return config;
+//     },
+//     response: function (response) {
+//       if (response.status === 401) {
+//         // handle the case where the user is not authenticated
+//       }
+//       return response || $q.when(response);
+//     }
+//   };
+// });
+// app.config(function ($httpProvider) {
+//   $httpProvider.interceptors.push('authInterceptor');
 // });
