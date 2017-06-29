@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute", "ngCookies", "angular-jwt"]);
+var app = angular.module("app", ["ngRoute", "ngCookies", "angular-jwt", "ngStorage"]);
 app.config(function($routeProvider){
     $routeProvider
     .when("/", {
@@ -30,12 +30,18 @@ app.config(function($routeProvider){
     });
 });
 
-app.config(function Config($httpProvider, jwtOptionsProvider) {
-    // Please note we're annotating the function so that the $injector works when the file is minified
-    jwtOptionsProvider.config({
-      tokenGetter: ['myService', function(myService) {
-        myService.doSomething();
-        return localStorage.getItem('id_token');
-      }]
-    });
-  })
+// app.run(function($rootScope, $http, $location, $localStorage) {
+//         // keep user logged in after page refresh
+//         if ($localStorage.currentUser) {
+//             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+//         }
+ 
+//         // redirect to login page if not logged in and trying to access a restricted page
+//         $rootScope.$on('$locationChangeStart', function (event, next, current) {
+//             var publicPages = ['/'];
+//             var restrictedPage = publicPages.indexOf($location.path()) === -1;
+//             if (restrictedPage && !$localStorage.currentUser) {
+//                 $location.path('/');
+//             }
+//         });
+// });

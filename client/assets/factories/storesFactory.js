@@ -1,23 +1,39 @@
-app.factory("storesFactory", ["$http", function($http){
+app.factory("storesFactory", ["$http", "$localStorage", "jwtHelper", function($http, $localStorage, jwtHelper){
     var factory = {};
 
-    factory.verifyUser = function(username, password, callback){
-        $http.post({
-            url:"http://127.0.0.1:8000/api/auth/token",
-            data: {
+    factory.login = function(username, password, callback){
+        $http.post(
+            "http://127.0.0.1:8000/api/auth/token",
+            {
                 "username": username,
                 "password": password
             }
-        })
+        )
         .then(function(returned_data){
             console.log(returned_data);
+            var token = returned_data.data.token;
+            $localStorage.currentUser = { username: username, token: token };
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+            var tokenPayload = jwtHelper.decodeToken(token);
+            var date = jwtHelper.getTokenExpirationDate(token);
+            var bool = jwtHelper.isTokenExpired(token);
+            console.log("Token: " + token);
+            console.log(tokenPayload);
+            console.log("Valid until: " + date);
+            console.log("Expired? " + bool); 
+            console.log($localStorage.currentUser);
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }
         })
         .catch(function(err){
-            console.log(err);
+            console.log(err)
+            callback(err.data);
         });
+    }
+    factory.logout = function(){
+        delete $localStorage.currentUser;
+        $http.defaults.headers.common.Authorization = '';
     }
     
     factory.getAllClients = function(callback){
@@ -102,20 +118,6 @@ app.factory("storesFactory", ["$http", function($http){
         $http.post("", client)
         .then(function(returned_data){
             console.log(returned_data.data);
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    }
-
-//*********for loginController functions***********
-
-    factory.login = function(user, callback){
-        $http.post("http://127.0.0.1:8000/admin/login/?next=/admin/", user)
-        .then(function(returned_data){
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }

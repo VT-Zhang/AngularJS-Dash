@@ -14,10 +14,10 @@
         return service;
 
         function Login(username, password, callback) {
-            $http.post('/api/authenticate', { username: username, password: password })
-                .success(function (response) {
+            $http.post('http://127.0.0.1:8000/api/auth/token', { username: username, password: password })
+                .then(function (response) {
                     // login successful if there's a token in the response
-                    if (response.token) {
+                    if (response.data.token) {
                         // store username and token in local storage to keep user logged in between page refreshes
                         $localStorage.currentUser = { username: username, token: response.token };
 

@@ -3,10 +3,12 @@ var bodyParser = require("body-parser");
 var path = require("path");
 var app = express();
 var root = __dirname;
+var cors = require('cors');
 
-app.use( express.static( path.join( root, 'client' )));
-app.use( express.static( path.join( root, 'bower_components' )));
-app.use(bodyParser.json());
+app.use( express.static( path.join( root, 'client' )) );
+app.use( express.static( path.join( root, 'bower_components' )) );
+app.use( bodyParser.json() );
+app.use( cors() );
 
 process.env["root"] = __dirname;
 
