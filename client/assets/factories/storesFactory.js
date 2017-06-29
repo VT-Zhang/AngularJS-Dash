@@ -1,5 +1,24 @@
 app.factory("storesFactory", ["$http", function($http){
     var factory = {};
+
+    factory.verifyUser = function(username, password, callback){
+        $http.post({
+            url:"http://127.0.0.1:8000/api/auth/token",
+            data: {
+                "username": username,
+                "password": password
+            }
+        })
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
     
     factory.getAllClients = function(callback){
         $http.get("assets/json/client_profiles.json")

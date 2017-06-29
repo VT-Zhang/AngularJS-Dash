@@ -1,24 +1,39 @@
-app.controller("loginController", ["$scope", "storesFactory", "$location", "$cookies", "jwtHelper", function($scope, mainFactory, $location, $cookies, jwtHelper){
-    $scope.user;
+app.controller("loginController", ["$scope", "storesFactory", "$location", "$cookies", "jwtHelper", "$http", function($scope, mainFactory, $location, $cookies, jwtHelper, $http){
+
     $scope.login = function(){
-        storesFactory.login($scope.user, function(data){
+        storesFactory.verifyUser($scope.username, $scope.password, function(data){
             console.log(data);
-            if(data.errors){
-                $scope.errors = data.errors;
-                $location.url("/");
-            }
-            else {
-                $cookies.put("user_id", data.id);
-                $cookies.put("username", data.username);
-                $location.url("/client_new");
-            }
+            
         });
     }
-    var expToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NhbXBsZXMuYXV0aDAuY29tLyIsInN1YiI6ImZhY2Vib29rfDEwMTU0Mjg3MDI3NTEwMzAyIiwiYXVkIjoiQlVJSlNXOXg2MHNJSEJ3OEtkOUVtQ2JqOGVESUZ4REMiLCJleHAiOjE0MTIyMzQ3MzAsImlhdCI6MTQxMjE5ODczMH0.7M5sAV50fF1-_h9qVbdSgqAnXVF7mz3I6RjS6JiH0H8';  
-    var tokenPayload = jwtHelper.decodeToken(expToken);
-    var date = jwtHelper.getTokenExpirationDate(expToken);
-    var bool = jwtHelper.isTokenExpired(expToken);
-    console.log(tokenPayload);
-    console.log(date);
-    console.log(bool);
+
+    
+
+    
+
+    $http({
+        url: "http://127.0.0.1:8000/api/auth/token",
+        method: "POST",
+        data:
+        {
+            "username":"alvin",
+            "password":"chenyuan0122"
+        }
+    })
+    .then(function(returned_data){
+        $scope.token = returned_data.data.token;
+        console.log($scope.token);
+        var tokenPayload = jwtHelper.decodeToken($scope.token);
+        var date = jwtHelper.getTokenExpirationDate($scope.token);
+        var bool = jwtHelper.isTokenExpired($scope.token);
+        console.log(tokenPayload);
+        console.log(date);
+        console.log(bool);
+    })
+    .catch(function(err){
+        console.log(err);
+    });
+
+
+    
 }]);
