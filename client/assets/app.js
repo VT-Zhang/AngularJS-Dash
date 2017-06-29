@@ -1,9 +1,9 @@
-var app = angular.module("app", ["ngRoute", "ngCookies"]);
+var app = angular.module("app", ["ngRoute", "ngCookies", "angular-jwt"]);
 app.config(function($routeProvider){
     $routeProvider
     .when("/", {
         templateUrl:"partials/login.html",
-        controller: "loginController"
+        controller:"loginController"
     })
     .when("/client_new", {
         templateUrl:"partials/client_new.html",
@@ -29,3 +29,5 @@ app.config(function($routeProvider){
         templateUrl:"partials/dashboard.html"
     });
 });
+
+
