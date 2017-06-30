@@ -1,4 +1,4 @@
-var app = angular.module("app", [ "ngRoute", "ngCookies", "angular-jwt", "ngStorage"]);
+var app = angular.module("app", ["ngMaterial", "ngMessages", "ngRoute", "ngCookies", "angular-jwt", "ngStorage"]);
 app.config(function($routeProvider){
     $routeProvider
     .when("/", {

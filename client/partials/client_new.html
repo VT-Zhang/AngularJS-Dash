@@ -1,6 +1,6 @@
 <h1>Create New Client</h1>
     <h2>{{username}}, welcome!</h2>
-    <h4>Import Client Data from Zoho CRM System</h4>
+    <!--<h4>Import Client Data from Zoho CRM System</h4>
     <select ng-model="selectedID" ng-change="getZohoAccount()">
         <option ng-repeat="client in clients" value="{{client.zoho_id}}">{{client.name}}</option>
     </select>
@@ -36,4 +36,106 @@
     <div ng-repeat="error in errors">
          <p style="color:red">{{error}}</p>
     </div>
+<hr>-->
 
+<form name="newClientForm">
+    <div layout="row">
+        <md-input-container flex="100">
+            <label>Import Client Data from Zoho CRM System</label>
+            <md-select ng-model="selectedID" ng-change="getZohoAccount()">
+                <md-option ng-repeat="client in clients" value="{{client.zoho_id}}">{{client.name}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-input-container flex="50">
+            <label>Client Type</label>
+            <md-select ng-model="newClient.client_type" name="client_type" required="">
+                <md-option ng-repeat="client_type in client_types" value="{{client_type.id}}">{{client_type.name}}</md-option>
+            </md-select>
+            <div ng-messages="newClientForm.client_type.$error">
+                <div ng-message="required">Please choose a type</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="50">
+            <label>Name</label>
+            <input required="" ng-model="newClient.name" name="name">
+            <div ng-messages="newClientForm.name.$error">
+                <div ng-message="required">Client name is required.</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-input-container flex="33">
+            <label>Phone</label>
+            <input type="text" ng-model="newClient.phone" name="phone" required="">
+            <div ng-messages="newClientForm.phone.$error">
+                <div ng-message="required">A phone number is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="33">
+            <label>Fax</label>
+            <input type="text" ng-model="newClient.fax" name="fax">
+        </md-input-container>
+        <md-input-container flex="33">
+            <label>Email</label>
+            <input type="text" ng-model="newClient.email" name="email" required="" ng-pattern="/^.+@.+\..+$/">
+            <div ng-messages="newClientForm.email.$error">
+                <div ng-message="required">Email is required.</div>
+                <div ng-message="pattern">Double check the email format..</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-input-container flex="50">
+            <label>Address1</label>
+            <input type="text" ng-model="newClient.address1" name="address1" required="">
+            <div ng-messages="newClientForm.address1.$error">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="50">
+            <label>Address2</label>
+            <input type="text" ng-model="newClient.address2" name="address1">
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-input-container flex="50">
+            <label>City</label>
+            <input type="text" ng-model="newClient.city" name="city" required="">
+            <div ng-messages="newClientForm.city.$error">
+                <div ng-message="required">City is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="50">
+            <label>State</label>
+            <md-select ng-model="newClient.state" name="state" required="">
+                <md-option ng-repeat="state in states" value="{{state.name}}">{{state.name}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-input-container flex="50">
+            <label>Zipcode</label>
+            <input type="text" ng-model="newClient.zipcode" name="zipcode" required="">
+            <div ng-messages="newClientForm.zipcode.$error">
+                <div ng-message="required">Zipcode is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="50">
+            <label>Country</label>
+            <md-select ng-model="newClient.country" name="country" required="">
+                <md-option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div>
+        <md-button "createClient()" type="submit">Create New Client</md-button>
+    </div>
+
+</form>
