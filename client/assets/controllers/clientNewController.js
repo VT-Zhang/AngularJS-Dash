@@ -23,7 +23,7 @@ app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", fu
         storesFactory.createClient($scope.newClient, function(data){
             console.log(data);
             if(data.statusText === "Bad Request"){
-                $scope.errors = data.data;
+                $scope.errors = data;
             }
             console.log($scope.errors);
             index();
