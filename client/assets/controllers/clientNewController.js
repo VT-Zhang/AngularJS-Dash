@@ -20,6 +20,7 @@ app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", fu
     index();
 
     $scope.create = function(){
+        $scope.newClient.address1 = $scope.newClient.address;
         storesFactory.createClient($scope.newClient, function(data){
             console.log(data);
             if(data.errors){

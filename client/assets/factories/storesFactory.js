@@ -4,7 +4,7 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
 //********* login and logout function ***********
     factory.login = function(user, callback){
         $http.post(
-            "http://127.0.0.1:8000/api/auth/token",
+            "http://127.0.0.1:8000/api/auth/token/",
             {
                 "username": user.username,
                 "password": user.password
@@ -13,7 +13,7 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         .then(function(returned_data){
             var token = returned_data.data.token;
             $cookies.put("token", token)
-            $http.defaults.headers.common['Authorization'] = 'JWT ' + token;
+            // $http.defaults.headers['Authorization'] = 'JWT ' + token;
             // var tokenPayload = jwtHelper.decodeToken(token);
             // var date = jwtHelper.getTokenExpirationDate(token);
             // var bool = jwtHelper.isTokenExpired(token);
@@ -34,21 +34,22 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
     factory.logout = function(){
         $cookies.remove("token");
         $cookies.remove("username");
-        $http.defaults.headers.common.Authorization = '';
+        $http.defaults.headers.Authorization = '';
     }
 
 
 //*********for clientProfileController functions***********
 
     factory.getAllClients = function(callback){
-        $http({
-            url: "http://127.0.0.1:8000/api/client/",
-            method: "GET",
-            headers: {
-                "Authorization": "JWT " + $cookies.get("token"),
-                'Content-Type': 'application/json',
-            }
-        })
+        // $http({
+        //     url: "http://127.0.0.1:8000/api/client/",
+        //     method: "GET",
+        //     headers: {
+        //         "Authorization": "JWT " + $cookies.get("token"),
+        //         'Content-Type': 'application/json',
+        //     }
+        // })
+        $http.get("http://127.0.0.1:8000/api/client/")
         .then(function(returned_data){
             console.log(returned_data);
             if(typeof(callback)=="function"){
@@ -85,18 +86,6 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         });
     }
 
-    // factory.loadClientTypes = function(callback){
-    //     $http.get("assets/json/client_types.json")
-    //     .then(function(returned_data){
-    //         if(typeof(callback)=="function"){
-    //             callback(returned_data);
-    //         }
-    //     })
-    //     .catch(function(err){
-    //         console.log(err);
-    //     });
-    // }
-
 //*********for clientNewController functions***********
     factory.getZohoID = function(callback){
         $http.get('http://127.0.0.1:8000/api/zohocrm')
@@ -125,16 +114,8 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
     }
 
     factory.getClientTypes = function(callback){
-        $http({
-            url: "http://127.0.0.1:8000/api/client/type/",
-            method: "GET",
-            headers: {
-                "Authorization": "JWT " + $cookies.get("token"),
-                'Content-Type': 'application/json',
-            }
-        })
+        $http.get("http://127.0.0.1:8000/api/client/type/")
         .then(function(returned_data){
-            console.log(returned_data);
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }
@@ -146,15 +127,7 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
 
     factory.createClient = function(client, callback){
         console.log(client);
-        $http({
-            url: "http://127.0.0.1:8000/api/client/create/",
-            method: "POST",
-            headers: {
-                "Authorization": "JWT " + $cookies.get("token"),
-                'Content-Type': 'application/json',
-            },
-            data: client,
-        })
+        $http.post("http://127.0.0.1:8000/api/client/create/", client)
         .then(function(returned_data){
             console.log(returned_data.data);
             if(typeof(callback)=="function"){
