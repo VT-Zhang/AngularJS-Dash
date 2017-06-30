@@ -12,8 +12,8 @@ app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", fu
         storesFactory.loadCountries(function(res){
             $scope.countries = res.data;
         });
-        storesFactory.loadClientTypes(function(res){
-            $scope.client_types = res.data;
+        storesFactory.getClientTypes(function(data){
+            $scope.client_types = data;
         });
     }
 

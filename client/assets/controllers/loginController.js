@@ -19,20 +19,5 @@ app.controller("loginController", ["$window", "$scope", "storesFactory", "$locat
         storesFactory.logout();
         console.log("Now the credential is: " + $cookies.get("token"));
     }
-
-    // $scope.submit = function () {
-    //     $http
-    //       .post("http://127.0.0.1:8000/api/auth/token", $scope.user)
-    //       .then(function (data, status, headers, config) {
-    //         $window.sessionStorage.token = data.token;
-    //         $scope.message = 'Welcome';
-    //       })
-    //       .catch(function (data, status, headers, config) {
-    //         // Erase the token if the user fails to log in
-    //         delete $window.sessionStorage.token;
-
-    //         // Handle login errors here
-    //         $scope.message = 'Error: Invalid user or password';
-    //       });
-    //   };
+    
 }]);

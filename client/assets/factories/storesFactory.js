@@ -42,7 +42,7 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
 
     factory.getAllClients = function(callback){
         $http({
-            url: "http://127.0.0.1:8000/api/patient/",
+            url: "http://127.0.0.1:8000/api/client/",
             method: "GET",
             headers: {
                 "Authorization": "JWT " + $cookies.get("token"),
@@ -85,17 +85,17 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         });
     }
 
-    factory.loadClientTypes = function(callback){
-        $http.get("assets/json/client_types.json")
-        .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data);
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    }
+    // factory.loadClientTypes = function(callback){
+    //     $http.get("assets/json/client_types.json")
+    //     .then(function(returned_data){
+    //         if(typeof(callback)=="function"){
+    //             callback(returned_data);
+    //         }
+    //     })
+    //     .catch(function(err){
+    //         console.log(err);
+    //     });
+    // }
 
 //*********for clientNewController functions***********
     factory.getZohoID = function(callback){
@@ -124,9 +124,37 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         });
     }
 
+    factory.getClientTypes = function(callback){
+        $http({
+            url: "http://127.0.0.1:8000/api/client/type/",
+            method: "GET",
+            headers: {
+                "Authorization": "JWT " + $cookies.get("token"),
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(function(returned_data){
+            console.log(returned_data);
+            if(typeof(callback)=="function"){
+                callback(returned_data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    }
+
     factory.createClient = function(client, callback){
         console.log(client);
-        $http.post("", client)
+        $http({
+            url: "http://127.0.0.1:8000/api/client/create/",
+            method: "POST",
+            headers: {
+                "Authorization": "JWT " + $cookies.get("token"),
+                'Content-Type': 'application/json',
+            },
+            data: client,
+        })
         .then(function(returned_data){
             console.log(returned_data.data);
             if(typeof(callback)=="function"){
