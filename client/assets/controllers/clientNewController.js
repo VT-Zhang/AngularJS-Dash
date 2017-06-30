@@ -19,24 +19,21 @@ app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", fu
 
     index();
 
-    $scope.create = function(){
-        $scope.newClient.address1 = $scope.newClient.address;
+    $scope.createClient = function(){
         storesFactory.createClient($scope.newClient, function(data){
             console.log(data);
-            if(data.errors){
-                $scope.errors = data.errors;
+            if(data.statusText === "Bad Request"){
+                $scope.errors = data.data;
             }
+            console.log($scope.errors);
             index();
             $scope.newClient = {};
         });
     }
 
     $scope.getZohoAccount = function(){
-        storesFactory.getZohoAccount($scope.selected.zoho_id, function(data){
+        storesFactory.getZohoAccount($scope.selectedID, function(data){
             console.log(data);
-            if(data.errors){
-                $scope.errors = data.errors;
-            }
             $scope.newClient = data;
             console.log($scope.newClient.name);
         });

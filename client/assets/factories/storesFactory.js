@@ -1,4 +1,4 @@
-app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper", function($http, $localStorage, $cookies, jwtHelper){
+app.factory("storesFactory", ["$http", "$cookies", "jwtHelper", function($http, $cookies, jwtHelper){
     var factory = {};
 
 //********* login and logout function ***********
@@ -21,12 +21,10 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
             // console.log(tokenPayload);
             // console.log("Valid until: " + date);
             // console.log("Expired? " + bool); 
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
+            callback(returned_data.data);
         })
         .catch(function(err){
-            console.log(err)
+            console.log(err.data);
             callback(err.data);
         });
     }
@@ -52,12 +50,11 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         $http.get("http://127.0.0.1:8000/api/client/")
         .then(function(returned_data){
             console.log(returned_data);
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
+            callback(returned_data.data);
         })
         .catch(function(err){
-            console.log(err);
+            console.log(err.data);
+            callback(err.data);
         });
     }
 
@@ -65,24 +62,22 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
     factory.loadStates = function(callback){
         $http.get("assets/json/states.json")
         .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data);
-            }
+            callback(returned_data);
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
     factory.loadCountries = function(callback){
         $http.get("assets/json/countries.json")
         .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data);
-            }
+            callback(returned_data);
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
@@ -90,44 +85,47 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
     factory.getZohoID = function(callback){
         $http.get('http://127.0.0.1:8000/api/zohocrm')
         .then(function(returned_data){
-            console.log(returned_data);
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
+            callback(returned_data.data);
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
     factory.getZohoAccount = function(id, callback){
         $http.get('http://127.0.0.1:8000/api/zohocrm/'+id)
         .then(function(returned_data){
-            console.log(returned_data);
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
+            callback(returned_data.data);
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
     factory.getClientTypes = function(callback){
         $http.get("http://127.0.0.1:8000/api/client/type/")
         .then(function(returned_data){
-            if(typeof(callback)=="function"){
-                callback(returned_data.data);
-            }
+            callback(returned_data.data);
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
     factory.createClient = function(client, callback){
         console.log(client);
-        $http.post("http://127.0.0.1:8000/api/client/create/", client)
+        $http({
+            url:"http://127.0.0.1:8000/api/client/create/",
+            method: "POST",
+            data: client,
+            headers: {
+                "Authorization": "JWT " + $cookies.get("token"),
+                'Content-Type': 'application/json',
+            }
+        })
         .then(function(returned_data){
             console.log(returned_data.data);
             if(typeof(callback)=="function"){
@@ -136,9 +134,21 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
         })
         .catch(function(err){
             console.log(err);
+            callback(err);
         });
     }
 
+
+
+
+
+
+
+
+
+
+
+// old functions for the project
 //*********for dashboardController functions***********
      factory.dashboardIndex = function(callback){
         $http.get("/dashboard")
