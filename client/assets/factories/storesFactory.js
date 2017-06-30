@@ -11,18 +11,16 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
             }
         )
         .then(function(returned_data){
-            console.log(returned_data);
             var token = returned_data.data.token;
             $cookies.put("token", token)
-            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-            var tokenPayload = jwtHelper.decodeToken(token);
-            var date = jwtHelper.getTokenExpirationDate(token);
-            var bool = jwtHelper.isTokenExpired(token);
-            console.log("Token: " + token);
-            console.log(tokenPayload);
-            console.log("Valid until: " + date);
-            console.log("Expired? " + bool); 
-            console.log($localStorage.token);
+            $http.defaults.headers.common['Authorization'] = 'JWT ' + token;
+            // var tokenPayload = jwtHelper.decodeToken(token);
+            // var date = jwtHelper.getTokenExpirationDate(token);
+            // var bool = jwtHelper.isTokenExpired(token);
+            // console.log("The token is: " + token);
+            // console.log(tokenPayload);
+            // console.log("Valid until: " + date);
+            // console.log("Expired? " + bool); 
             if(typeof(callback)=="function"){
                 callback(returned_data.data);
             }
@@ -34,7 +32,8 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
     }
 
     factory.logout = function(){
-        delete $localStorage.currentUser;
+        $cookies.remove("token");
+        $cookies.remove("username");
         $http.defaults.headers.common.Authorization = '';
     }
 
@@ -42,7 +41,14 @@ app.factory("storesFactory", ["$http", "$localStorage", "$cookies", "jwtHelper",
 //*********for clientProfileController functions***********
 
     factory.getAllClients = function(callback){
-        $http.get("http://127.0.0.1:8000/api/client")
+        $http({
+            url: "http://127.0.0.1:8000/api/patient/",
+            method: "GET",
+            headers: {
+                "Authorization": "JWT " + $cookies.get("token"),
+                'Content-Type': 'application/json',
+            }
+        })
         .then(function(returned_data){
             console.log(returned_data);
             if(typeof(callback)=="function"){

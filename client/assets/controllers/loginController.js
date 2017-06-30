@@ -17,7 +17,7 @@ app.controller("loginController", ["$window", "$scope", "storesFactory", "$locat
 
     $scope.logout = function(){
         storesFactory.logout();
-        console.log("Now the credential is: " + $localStorage.token);
+        console.log("Now the credential is: " + $cookies.get("token"));
     }
 
     // $scope.submit = function () {
