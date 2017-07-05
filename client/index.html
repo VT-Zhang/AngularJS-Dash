@@ -36,6 +36,7 @@
         <script src="assets/controllers/clientNewController.js" charset="utf-8"></script>
         <script src="assets/controllers/clientProfileController.js" charset="utf-8"></script>
         <script src="assets/controllers/nutritionController.js" charset="utf-8"></script>
+        <script src="assets/controllers/appController.js" charset="utf-8"></script>
         <script src="assets/factories/storesFactory.js" charset="utf-8"></script>
 
         <style>
@@ -64,7 +65,7 @@
             }
         </style>
     </head>
-    <body>
+    <body ng-controller="appController" layout="column" ng-cloak>
         <div id="wrapper">
             <h1>Welcome to Aperiomics Dashboard</h1>
             <a href="#!">Login</a> |
@@ -74,5 +75,26 @@
             <br>
             <div ng-view=""></div>
         </div>
+
+         <section layout="row" flex>
+            <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+                </md-toolbar>
+                <md-content layout-margin>
+                    <p>This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.</p>
+                    <md-button ng-click="toggleLeft()" class="md-accent">Close this Sidenav</md-button>
+                </md-content>
+            </md-sidenav>
+            <md-content flex layout-padding>
+                <div layout="column" layout-align="top center">
+                    <p>Developers can also disable the backdrop of the sidenav.<br/>
+                    This will disable the functionality to click outside to close the sidenav.</p>
+                    <div>
+                        <md-button ng-click="toggleLeft()" class="md-raised">Toggle Sidenav</md-button>
+                    </div>
+                </div>
+            </md-content>
+        </section>
     </body>
 </html>

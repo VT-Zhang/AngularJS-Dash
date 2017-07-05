@@ -22,4 +22,12 @@ app.controller("clientProfileController", ["$scope", "$http", "storesFactory", '
         console.log('limit: ', limit);
     }
 
+    var promise;
+
+    $scope.loadStuff = function () {
+        $scope.promise = $timeout(function () {
+        // loading
+        }, 2000);
+    }
+
 }]);
