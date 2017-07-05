@@ -1,5 +1,5 @@
 <h1>Client Profiles</h1>
-<h3><input type="text" placeholder="search client" ng-model="filter_client" /></h3>
+<!--<h3><input type="text" placeholder="search client" ng-model="filter_client" /></h3>
 <table>
         <tr>
             <th>Client Name</th>
@@ -13,6 +13,27 @@
             <td>{{client.client_type_name}}</td>
             <td>{{client.phone}}</td>
         </tr>
-</table>
+</table>-->
 
 
+<md-table-container>
+    <table md-table>
+        <thead md-head>
+            <tr md-row>
+                <th md-column md-order-by="name"><span>Client Name</span></th>
+                <th md-column md-order-by="id"><span>ID</span></th>
+                <th md-column md-order-by="client_type"><span>Client Type</span></th>
+                <th md-column md-order-by="phone"><span>Phone</span></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row ng-repeat="client in clients">
+                <td md-cell>{{client.name}}</td>
+                <td md-cell>{{client.id_name}}</td>
+                <td md-cell>{{client.client_type_name}}</td>
+                <td md-cell>{{client.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</md-table-container>
+<md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{clients.count}}" md-page-select=true md-boundary-links=false md-on-paginate="logPagination"></md-table-pagination>
