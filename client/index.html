@@ -23,6 +23,8 @@
         <script src="angular-jwt/dist/angular-jwt.min.js"></script>        
         <script src="ngstorage/ngstorage.min.js"></script>
         <script src="angular-messages/angular-messages.min.js"></script>
+        <script src="angular-material-data-table/dist/md-data-table.min.js"></script>
+        <link href="angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
 
         <!--controllers and factories-->
         <script src="assets/app.js" charset="utf-8"></script>
@@ -33,10 +35,11 @@
         <script src="assets/controllers/loginController.js" charset="utf-8"></script>
         <script src="assets/controllers/clientNewController.js" charset="utf-8"></script>
         <script src="assets/controllers/clientProfileController.js" charset="utf-8"></script>
+        <script src="assets/controllers/nutritionController.js" charset="utf-8"></script>
         <script src="assets/factories/storesFactory.js" charset="utf-8"></script>
 
         <style>
-            table {
+            /*table {
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
                 width: 100%;
@@ -46,32 +49,29 @@
                 border: 1px solid #dddddd;
                 text-align: left;
                 padding: 8px;
-            }
+            }*/
 
             tr:nth-child(even) {
                 background-color: #dddddd;
             }
             #wrapper{
-                width: 800px;
+                /*width: 800px;
                 height: auto;
                 margin-left: auto;
-                margin-right: auto;
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-bottom: 20px;
-                border: 1px solid black;
+                margin-right: auto;*/
+                /*border: 1px solid black;*/
+                padding: 20px 20px 20px 20px;
             }
         </style>
     </head>
     <body>
         <div id="wrapper">
             <h1>Welcome to Aperiomics Dashboard</h1>
-            <a href="#!/dashboard">Dashboard</a> |
-            <a href="#!/products">Products</a> |
-            <a href="#!/orders">Orders</a> |
-            <a href="#!/customers">Customers</a> |
+            <a href="#!">Login</a> |
             <a href="#!/client_new">New Client</a> |
-            <a href="#!/client_profile">Client Profile</a> 
+            <a href="#!/client_profile">Client Profile</a> |
+            <a href="#!/nutrition">Test Table</a> 
+            <br>
             <div ng-view=""></div>
         </div>
     </body>

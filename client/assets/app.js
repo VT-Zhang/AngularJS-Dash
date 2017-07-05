@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngMaterial", "ngMessages", "ngRoute", "ngCookies", "angular-jwt", "ngStorage"]);
+var app = angular.module("app", ["ngMaterial", "ngMessages", "ngRoute", "ngCookies", "angular-jwt", "ngStorage", "md.data.table"]);
 app.config(function($routeProvider){
     $routeProvider
     .when("/", {
@@ -12,6 +12,10 @@ app.config(function($routeProvider){
     .when("/client_profile", {
         templateUrl:"partials/client_profile.html",
         controller: "clientProfileController"
+    })
+    .when("/nutrition", {
+        templateUrl:"partials/nutrition.html",
+        controller: "nutritionController"
     })
     .when("/dashboard", {
         templateUrl:"partials/dashboard.html"
@@ -42,6 +46,13 @@ app.factory('httpRequestInterceptor', function ($cookies) {
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 });
+
+app.config(['$mdThemingProvider', function ($mdThemingProvider) {
+    'use strict';
+    
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue');
+}])
 
 
 // app.config(function Config($httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
