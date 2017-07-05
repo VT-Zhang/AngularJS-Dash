@@ -1,4 +1,4 @@
-app.controller("loginController", ["$window", "$scope", "storesFactory", "$location", "$cookies", "$http", "$localStorage", function($window, $scope, storesFactory, $location, $cookies, $http, $localStorage){
+app.controller("loginController", ["$scope", "storesFactory", "$location", "$cookies", "$http", function($scope, storesFactory, $location, $cookies, $http){
 
     $scope.login = function(){
         storesFactory.login($scope.user, function(data){
@@ -19,5 +19,5 @@ app.controller("loginController", ["$window", "$scope", "storesFactory", "$locat
         storesFactory.logout();
         console.log("Now the credential is: " + $cookies.get("token"));
     }
-    
+
 }]);

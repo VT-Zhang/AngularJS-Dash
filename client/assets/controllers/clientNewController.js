@@ -1,4 +1,4 @@
-app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", function($scope, storesFactory, $cookies){
+app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", "$location", function($scope, storesFactory, $cookies, $location){
 
     $scope.newClient = {};
     $scope.username = $cookies.get("username");
@@ -28,6 +28,7 @@ app.controller("clientNewController", ["$scope", "storesFactory", "$cookies", fu
             console.log($scope.errors);
             index();
             $scope.newClient = {};
+            $location.url("/client_profile");
         });
     }
 
