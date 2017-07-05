@@ -116,15 +116,19 @@
             <md-select ng-model="newClient.state" name="state" required="">
                 <md-option ng-repeat="state in states" value="{{state.name}}">{{state.name}}</md-option>
             </md-select>
+            <div ng-messages="newClientForm.state.$error">
+                <div ng-message="required">State is required.</div>
+            </div>
         </md-input-container>
     </div>
 
     <div layout="row">
         <md-input-container flex="50">
             <label>Zipcode</label>
-            <input type="text" ng-model="newClient.zipcode" name="zipcode" required="">
+            <input type="text" ng-model="newClient.zipcode" name="zipcode" ng-pattern="/^[0-9]{5}$/" md-maxlength="5" required="">
             <div ng-messages="newClientForm.zipcode.$error">
                 <div ng-message="required">Zipcode is required.</div>
+                <div ng-message="pattern" class="my-message">That doesn't look like a valid zipcode. </div>
             </div>
         </md-input-container>
         <md-input-container flex="50">
@@ -132,6 +136,9 @@
             <md-select ng-model="newClient.country" name="country" required="">
                 <md-option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</md-option>
             </md-select>
+            <div ng-messages="newClientForm.country.$error">
+                <div ng-message="required">Country is required.</div>
+            </div>
         </md-input-container>
     </div>
     <div>
