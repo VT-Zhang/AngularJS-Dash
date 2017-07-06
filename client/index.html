@@ -84,34 +84,29 @@
         
     </head>
     <body ng-controller="appController" layout="column" ng-cloak>
-        <!--<md-content class="md-padding" style="background:#086A87">
-            <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-click="goto('page1')" name="page1">
-                    <ng-md-icon icon="phone" style="fill:wheat" size="20"></ng-md-icon>Personal Information
-            </md-nav-item>
-            <md-nav-item md-nav-click="goto('page2')" name="page2">
-                    <ng-md-icon icon="mode_edit" style="fill: wheat" size="20"></ng-md-icon>Edit
-            </md-nav-item>
-            <md-nav-item md-nav-click="goto('page3')" name="page3">
-                    <ng-md-icon icon="print" style="fill: wheat" size="20"></ng-md-icon>Print Detail1
-            </md-nav-item>
-            <md-nav-item md-nav-click="goto('page4')" name="page4">
-                        <ng-md-icon icon="print" style="fill: wheat" size="20"></ng-md-icon>Print Detail2      
-            </md-nav-item>
-            </md-nav-bar>
-        </md-content>    -->
         
-        <md-toobar>
-            <div>
-                <md-button ng-click="toggleLeft()" class="md-raised">Toggle Sidenav</md-button>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Icon">
+                    <i class="material-icons">battery_charging_full</i>
+                </md-button>
+                <h2><span>Aperiomics</span></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="User">
+                    <i class="material-icons">chat</i>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Messages">
+                    <i class="material-icons">account_circle</i>
+                </md-button>
             </div>
-        </md-toobar>
+        </md-toolbar>
+
         <div id="wrapper">
-            <h1>Welcome to Aperiomics Dashboard</h1>
             <a href="#!">Login</a> |
             <a href="#!/client_new">New Client</a> |
             <a href="#!/client_profile">Client Profile</a> |
             <a href="#!/nutrition">Test Table</a> 
+            <md-button ng-click="toggleLeft()" class="md-raised">Toggle Sidenav</md-button>
             <br>
             <div ng-view=""></div>
         </div>
@@ -119,13 +114,10 @@
          <section layout="row" flex>
             <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
                 <md-toolbar class="md-theme-indigo">
-                    <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-                </md-toolbar>
-                <md-toolbar>
-                    <md-button href="#!/">Login</md-button>
                 </md-toolbar>
                 <md-content layout-margin>
-                    <a href="#!/nutrition">Test Table</a> 
+                    <md-button class="md-raised" href="#!/new_client">New Client</md-button>
+                    <md-button class="md-raised" href="#!/">Login</md-button>
                     <md-button ng-click="toggleLeft()" class="md-accent">Close this Sidenav</md-button>
                 </md-content>
             </md-sidenav>
