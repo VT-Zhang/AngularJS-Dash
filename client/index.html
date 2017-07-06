@@ -64,24 +64,25 @@
                 padding: 20px 20px 20px 20px;
             }
              .md-button.md-raised:not([disabled]) {
-            width: 100%;
-            margin-top: 40px;
-            background-color: #4a89dc;
-            height: 48px;
-            color: white;  
+                width: 100%;
+                margin-top: 40px;
+                background-color: #4a89dc;
+                height: 48px;
+                color: white;  
             }
             h1,h3 {
-            font-weight: 300;
+                font-weight: 300;
             }
 
             h1 {
-            color: #636363;
+                color: white;
             }
             h3 {
-            color: #4a89dc;
+                color: #4a89dc;
             }
-            md-backdrop.md-sidenav-backdrop{
-                display:none
+
+            md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+                border-color: grey;
             }
         </style>
         
@@ -90,24 +91,16 @@
         
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
+                <md-button hide-gt-sm class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
                     <md-tooltip>Open Side Nav</md-tooltip>
                     <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Icon">
-                    <md-tooltip>Aperiomics</md-tooltip>
-                    <i class="material-icons">battery_charging_full</i>
-                </md-button>
-                <h2><span>Aperiomics</span></h2>
+                <h1><span>Aperiomics</span></h1>
 
                 <span flex></span>
-                <a href="#!">Login</a> |
-                <a href="#!/client_new">New Client</a> |
-                <a href="#!/client_profile">Client Profile</a> |
-                <a href="#!/nutrition">Test Table</a> 
                 
                 <span flex></span>
-                <md-input-container class="md-accent" flex="20" style="margin-right:40px; margin-top:45px; ">
+                <md-input-container flex="20" style="margin-right:40px; margin-top:45px; ">
                     <md-icon style="color:white" class="material-icons">&#xE8B6;</md-icon>
                     <input ng-model="searchInput" placeholder="Search" style="color:white;padding-left:20px;margin-left:5px">
                 </md-input-container>
@@ -137,53 +130,73 @@
                 </md-button>
             </div>
         </md-toolbar>
+        <div class="container" layout="row" flex>
+            <md-sidenav md-disable-backdrop md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+                <md-toolbar layout="row">
+                <div class="md-toolbar-tools">
+                    <h2><span>Side Panel</span></h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="openSideNavPanel()">
+                        <md-tooltip>Close Side Panel</md-tooltip>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
+                    </md-button>
+                </div>
+                </md-toolbar> 
+                <md-list ng-click="openSideNavPanel()">
+                    <md-subheader class="md-no-sticky">Favorites</md-subheader>
+                    <md-list-item>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE0C9;</md-icon>
+                        <p>Messages</p>
+                        <div class="md-secondary">2</div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE878;</md-icon>
+                        <p>Events</p>
+                        <md-icon class="md-secondary">2</md-icon>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE251;</md-icon>
+                        <p>Photos</p>
+                        <md-icon class="md-secondary">2</md-icon>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-subheader class="md-no-sticky">Pages</md-subheader>
+                    <md-list-item>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE7F9;</md-icon>
+                        <p>Pages Feed</p>
+                        <div class="md-secondary">2</div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
+                        <p>Pages</p>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item style="padding-left: 18px;">
+                        <i class="material-icons">chat</i>
+                        <md-button href="#!" class="md-primary">Login</md-button>
+                    </md-list-item>
+                    <md-list-item style="padding-left: 18px;">
+                        <i class="material-icons">chat</i>
+                        <md-button href="#!/client_new" class="md-primary">New Client</md-button>
+                    </md-list-item>
+                    <md-list-item style="padding-left: 18px;">
+                        <i class="material-icons">chat</i>
+                        <md-button href="#!/client_profile" class="md-primary">Client Profile</md-button>
+                    </md-list-item>
+                    <md-list-item style="padding-left: 18px;">
+                        <i class="material-icons">chat</i>
+                        <md-button href="#!/nutrition" class="md-primary">Test</md-button>
+                    </md-list-item>
+                </md-list>
+            </md-sidenav>
 
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-            <md-toolbar layout="row">
-            <div class="md-toolbar-tools">
-                <h2><span>Side Panel</span></h2>
-                <span flex></span>
-                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
-                    <md-tooltip>Close Side Panel</md-tooltip>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
-                </md-button>
-            </div>
-            </md-toolbar> 
-            <md-list>
-                <md-subheader class="md-no-sticky">Favorites</md-subheader>
-                <md-list-item>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE0C9;</md-icon>
-                    <p>Messages</p>
-                    <div class="md-secondary">2</div>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE878;</md-icon>
-                    <p>Events</p>
-                    <md-icon class="md-secondary">2</md-icon>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE251;</md-icon>
-                    <p>Photos</p>
-                    <md-icon class="md-secondary">2</md-icon>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-subheader class="md-no-sticky">Pages</md-subheader>
-                <md-list-item>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE7F9;</md-icon>
-                    <p>Pages Feed</p>
-                    <div class="md-secondary">2</div>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon class="md-default-theme" class="material-icons">&#xE1BC;</md-icon>
-                    <p>Likes</p>
-                    <div class="md-secondary">20+</div>
-                </md-list-item>
-            </md-list>
-        </md-sidenav>
-
-        <div id="wrapper">
-            <div ng-view=""></div>
+            <md-content>
+                <div id="wrapper">
+                    <div ng-view=""></div>
+                </div>
+            </md-content>
         </div>
         
+
     </body>
 </html>

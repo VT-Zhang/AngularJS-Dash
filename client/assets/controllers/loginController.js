@@ -9,7 +9,7 @@ app.controller("loginController", ["$scope", "storesFactory", "$location", "$coo
             }
             else{
                 $cookies.put("username", $scope.user.username)
-                $location.url("/client_new");
+                $location.url("/client_profile");
             }
 
         });

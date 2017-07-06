@@ -1,6 +1,6 @@
-app.controller('appController', function ($scope, $timeout, $mdSidenav) {
+app.controller('appController', function ($scope, $timeout, $mdMedia, $mdSidenav) {
     $scope.openSideNavPanel = function() {
-        $mdSidenav('left').open();
+        $mdSidenav('left').toggle();
     };
     $scope.closeSideNavPanel = function() {
         $mdSidenav('left').close();

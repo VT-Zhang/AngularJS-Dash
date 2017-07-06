@@ -14,7 +14,7 @@
 <div  layout="row" layout-align="center center">
 
   <div class="login">
-    <h1>Aperiomics Dashboard Sign-In</h1>
+    <h1 style="color: grey;">Aperiomics Dashboard Sign-In</h1>
       <form name="clientLogin">
         <md-input-container md-no-float>
           <input ng-model="user.username" name="username" type="text" placeholder="Username" ng-required="true">
@@ -45,49 +45,36 @@
 
 <style>
     body {
-    background: #eee;
-    -webkit-font-smoothing: antialiased;
+        background: #eee;
+        -webkit-font-smoothing: antialiased;
     }
 
     .login {
-    margin-top: 4em;
-    text-align: center;
-    }
-
-    h1,
-    h3 {
-    font-weight: 300;
-    }
-
-    h1 {
-    color: #636363;
-    }
-
-    h3 {
-    color: #4a89dc;
+        margin-top: 4em;
+        text-align: center;
     }
 
     footer p {
-    color: #888;
-    font-size: 13px;
-    letter-spacing: .4px;
+        color: #888;
+        font-size: 13px;
+        letter-spacing: .4px;
     }
     /* Form Styles */
     form {
-    width: 340px;
-    margin: 4em auto;
-    padding: 3em 2em 2em 2em;
-    background: #fafafa;
-    border: 1px solid #ebebeb;
-    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+        width: 340px;
+        margin: 4em auto;
+        padding: 3em 2em 2em 2em;
+        background: #fafafa;
+        border: 1px solid #ebebeb;
+        box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
     }
 
     .inputIconDemo {
-    min-height: 48px;
+     min-height: 48px;
     }
 
     md-input-container:not(.md-input-invalid) > md-icon.email {
-    color: green;
+        color: green;
     }
 
     /*md-input-container.md-icon-float {
@@ -95,12 +82,12 @@
     }*/
 
     md-input-container:not(.md-input-invalid) > md-icon.name {
-    color: #4a89dc;
+        color: #4a89dc;
     }
 
     md-input-container.md-input-invalid > md-icon.email,
-    .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
-    color: red;
+        .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+        color: red;
     }
 
     /*md-input-container ng-messages,
@@ -109,40 +96,40 @@
     }*/
 
     .md-button.md-raised:not([disabled]) {
-    width: 100%;
-    margin-top: 40px;
-    background-color: #4a89dc;
-    height: 48px;
-    color: white;  
+        width: 100%;
+        margin-top: 40px;
+        background-color: #4a89dc;
+        height: 48px;
+        color: white;  
     }
 
     .md-button.md-primary.md-raised:not([disabled]):hover, .md-button.md-primary.md-fab:not([disabled]):hover {
-    background-color: #357DDC;
+        background-color: #357DDC;
     }
     /* Footer Styles */
 
     footer a {
-    color: #4a89dc;
-    text-decoration: none;
-    transition: all .2s ease;
+        color: #4a89dc;
+        text-decoration: none;
+        transition: all .2s ease;
     }
 
     footer a:hover {
-    color: #666;
-    text-decoration: underline;
+        color: #666;
+        text-decoration: underline;
     }
 
     footer img {
-    width: 180px;
-    transition: all .2s ease;
+        width: 180px;
+        transition: all .2s ease;
     }
 
     footer img:hover {
-    opacity: .83;
+        opacity: .83;
     }
 
     footer img:focus,
     footer a:focus {
-    outline: none;
+        outline: none;
     }
 </style>
