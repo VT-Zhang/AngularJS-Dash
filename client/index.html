@@ -44,6 +44,10 @@
             tr:nth-child(even) {
                 background-color: #dddddd;
             }
+            #main-content{
+                margin-left: auto;
+                margin-right: auto;
+            }
             #wrapper{
                 /*width: 800px;
                 height: auto;
@@ -86,6 +90,9 @@
                 /* Change to block display */
                 /*display: block;*/
             }
+            md-backdrop.md-sidenav-backdrop {
+                display: none;
+            }
         </style>
         
     </head>
@@ -93,8 +100,8 @@
         
         <md-toolbar class="topnav">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
-                    <md-tooltip>Open Side Nav</md-tooltip>
+                <md-button class="md-icon-button" aria-label="Side Panel" ng-click="toggleSideNav()" >
+                    <md-tooltip>Toggle Side Nav</md-tooltip>
                     <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
                 </md-button>
                 <h1><span>Aperiomics</span></h1>
@@ -133,18 +140,9 @@
             </div>
         </md-toolbar>
         <div class="container" layout="row" flex>
-            <md-sidenav md-disable-backdrop md-is-locked-open="$mdMedia('gt-sm')" class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
-                <!--<md-toolbar layout="row">
-                <div class="md-toolbar-tools">
-                    <h2><span>Side Panel</span></h2>
-                    <span flex></span>
-                    <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="openSideNavPanel()">
-                        <md-tooltip>Close Side Panel</md-tooltip>
-                        <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
-                    </md-button>
-                </div>
-                </md-toolbar> -->
-                <md-list ng-click="openSideNavPanel()">
+            <md-sidenav md-is-locked-open="$mdMedia('gt-sm') && switch" class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+                
+                <md-list ng-click="toggleSideNav()">
                     <md-subheader class="md-no-sticky">Favorites</md-subheader>
                     <md-list-item>
                         <md-icon class="md-default-theme" class="material-icons">&#xE0C9;</md-icon>
@@ -193,7 +191,7 @@
                 </md-list>
             </md-sidenav>
 
-            <md-content>
+            <md-content id="main-content">
                 <div id="wrapper">
                     <div ng-view=""></div>
                 </div>
